@@ -1,0 +1,8 @@
+function __construct()
+    {
+        // Construct the parent class
+        parent::__construct();
+        //$this->auth();
+        $model_name=$this->model_name;
+        $this->load->model($model_name);
+    }

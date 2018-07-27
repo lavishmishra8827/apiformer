@@ -1,0 +1,22 @@
+		$selection=implode(",",$selection_fields);
+		$table1=$this->table1;
+		$model_name=$this->model_name;               
+		$where_conditions=$this->get_post_values($where_condition_fields);
+		$this->check_post_values($where_conditions);
+		//$this->print_array($where_conditions);        
+		$result=$this->$model_name->select($selection,$table1,$where_conditions);
+		if($result)
+		{
+		    $data_response['status']=1;
+		    $data_response['msg']='success';
+		    $data_response['data']=$result;
+		    $this->response($data_response);
+		}
+		else
+		{
+		    $data_response['status']=0;
+		    $data_response['msg']='couldnot select from table'.$table1;
+		    $data_response['data']=$result;
+		    $this->response($data_response);
+		}
+	}

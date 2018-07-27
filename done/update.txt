@@ -1,0 +1,58 @@
+public function update_post()
+    {
+		$where_condition_fields=array('organiser_id','cluster_id');
+		$data_to_be_appended_fields=array('deleted_by','added_by');
+		$data_fields=array('cluster_id','organiser_id');
+        $table1=$this->table1;
+        $table2=$this->table2;
+        $time=date("Y-m-d H:i:s");
+        $model_name=$this->model_name;
+        $data=$this->get_post_values($data_fields);
+        $this->check_post_values($data);
+        //$this->print_array($data);
+        $where_conditions=$this->get_post_values($where_condition_fields);
+        $this->check_post_values($where_conditions);
+        //$this->print_array($where_conditions);
+        $data_to_be_appended=$this->get_post_values($data_to_be_appended_fields);
+        $data_to_be_appended['dod']=$time;
+        $data_to_be_appended['is_active']='Y';
+        $this->check_post_values($data_to_be_appended);
+        //$this->print_array($data_to_be_appended);
+        $selection="*";
+        $result=$this->$model_name->select($selection,$table1,$where_conditions);
+        if(!$result)
+        {
+            $data_response['status']=1;
+            $data_response['msg']="no data of this where_conditions present";
+            $data_response['where_conditions']=$where_conditions;
+            $this->response($data_response);
+        }
+        $result=$this->$model_name->insert_hist($table1,$where_conditions,$table2,$data_to_be_appended);
+        if($result)
+        {
+            $data_response['status']=1;
+            $data_response['msg']='inserted data into table '.$table2;
+            //$this->response($data_response);
+            $result=$this->$model_name->update($table1,$data,$where_conditions);
+            if($result)
+            {
+                $data_response['status']=1;
+                $data_response['msg']='updated data in '.$table1;
+                $this->response($data_response);
+            }
+            else
+            {
+                $data_response['status']=0;
+                $data_response['msg']='inserted data into '.$table1." but couldnot update in ".$table2;
+                $this->response($data_response);
+            }
+        }
+        else
+        {
+            $data_response['status']=0;
+            $data_response['msg']='couldnot insert data into table '.$table2;
+            $this->response($data_response);
+        }
+
+
+    }

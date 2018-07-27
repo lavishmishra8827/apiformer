@@ -1,0 +1,63 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+class Cluster extends MY_Controller {
+var $table1="cluster";
+var $table2="cluster_hist";
+var $model_name="Cluster_model";
+function __construct()
+    {
+        // Construct the parent class
+        parent::__construct();
+        //$this->auth();
+        $model_name=$this->model_name;
+        $this->load->model($model_name);
+    }
+
+
+
+//ENTER THE OTHER FUNCTIONS HERE
+
+
+    public function check_post_values($array)
+    {
+        $array_keys=array_keys($array);
+        $size=sizeof($array_keys);
+        $result="";
+        
+        for($i=0;$i<$size;$i++)
+        {
+            if(empty($array[$array_keys[$i]]))
+            {
+                $data_response['status']=0;
+                $data_response['msg']=$array_keys[$i].' not received';
+                $this->response($data_response);    
+            }
+        }
+         //$this->response($result);
+    }
+    public function print_array($array)
+    {
+        $data_response['status']=0;
+        $data_response['msg']='displaying the object of values received';
+        $data_response['data']=$array;
+        $this->response($data_response);
+    }
+    public function create_where_conditions($where_condition_fields,$where_condition_values)
+    {
+        $size=sizeof($where_condition_fields);
+        for($i=0;$i<$size;$i++)
+        {
+            $where_conditions[$where_condition_fields[$i]]=$where_condition_values[$i];
+        }
+        return $where_conditions;
+    }
+    public function get_post_values($fields)
+    {
+        $size=sizeof($fields);
+        for($i=0;$i<$size;$i++)
+        {
+            $data[$fields[$i]]=$this->post($fields[$i]);
+        }
+        return $data;
+    }
+}

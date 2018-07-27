@@ -1,0 +1,43 @@
+        $table1=$this->table1;
+        $table2=$this->table2;
+        $time=date("Y-m-d H:i:s");
+        $model_name=$this->model_name;
+        $where_conditions=$this->get_post_values($where_condition_fields);
+        $this->check_post_values($where_conditions);
+        //$this->print_array($where_conditions);
+        $data_to_be_appended=$this->get_post_values($data_to_be_appended_fields);
+        $extra_data['dod']=$time;
+        $extra_data['is_active']='N';
+        $data_to_be_appended=array_merge($data_to_be_appended,$extra_data);
+        $this->check_post_values($data_to_be_appended);
+        //$this->print_array($data_to_be_appended);
+        $result=$this->$model_name->insert_hist($table1,$where_conditions,$table2,$data_to_be_appended);
+        if($result)
+        {
+            $data_response['status']=1;
+            $data_response['msg']='inserted data into table '.$table2;
+            //$this->response($data_response);
+            $result=$this->$model_name->delete($table1,$where_conditions);
+            if($result)
+            {
+                $data_response['status']=1;
+                $data_response['msg']='deleted data from '.$table1;
+                $this->response($data_response);
+            }
+            else
+            {
+                $data_response['status']=0;
+                $data_response['msg']='inserted data into '.$table1." but couldnot delete from ".$table2;
+                $this->response($data_response);
+            }
+        }
+        else
+        {
+            $data_response['status']=0;
+            $data_response['msg']='couldnot insert data into table '.$table2;
+            $this->response($data_response);
+        }
+
+
+
+    }

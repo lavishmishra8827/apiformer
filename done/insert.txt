@@ -1,0 +1,27 @@
+public function insert_post()
+    {
+		$data_fields=array('cluster_id','organiser_id');
+        $table1=$this->table1;
+        $time=date("Y-m-d H:i:s");
+        $model_name=$this->model_name;        
+        $data=$this->get_post_values($data_fields);
+        $this->check_post_values($data);
+        //$this->print_array($data);
+        $data['doa']=$time;
+        $data['is_active']='Y';        
+        $result=$this->$model_name->insert($table1,$data);
+        if($result)
+        {
+            $data_response['status']=1;
+            $data_response['msg']="inserted the data into table ".$table1;
+            $data_response['data']=$result;
+            $this->response($data_response);
+        }
+        else
+        {
+            $data_response['status']=0;
+            $data_response['msg']="could not insert the data into table ".$table1;
+            $data_response['data']=$result;
+            $this->response($data_response);
+        }
+    }
