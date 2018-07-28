@@ -18,7 +18,7 @@ $towrite.=form_string_of_array($where_condition_fields);
 $towrite.=");".PHP_EOL;
 fputs($file_write,$towrite);
 
-$towrite="		$"."select_condition_fields=array(";
+$towrite="		$"."selection_fields=array(";
 $towrite.=form_string_of_array($select_condition_fields);
 $towrite.=");".PHP_EOL;
 fputs($file_write,$towrite);
