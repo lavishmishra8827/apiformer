@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class  extends MY_Controller {
-var $table1="";
-var $table2="";
-var $model_name="_model";
+class Farm_harvest extends MY_Controller {
+var $table1="farm_harvest_details";
+var $table2="farm_harvest_details_hist";
+var $model_name="Farm_harvest_model";
 function __construct()
     {
         // Construct the parent class

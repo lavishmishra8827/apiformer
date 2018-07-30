@@ -2,6 +2,7 @@ public function delete_post()
     {
         $data_to_be_appended_fields=array('deleted_by');
         $where_condition_fields=array('cluster_id','organiser_id','comp_id');
+        
         $table1=$this->table1;
         $table2=$this->table2;
         $time=date("Y-m-d H:i:s");

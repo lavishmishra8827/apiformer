@@ -1,3 +1,10 @@
+public function insert_post()
+    {
+		$data['cluster_name']=$this->post('cluster_name');
+		$data['organiser_id']=$this->post('organiser_id');
+		$data['comp_id']=$this->post('comp_id');
+		$data['state']=$this->post('state');
+		$data['country']=$this->post('country');
         $table1=$this->table1;
         $time=date("Y-m-d H:i:s");
         $model_name=$this->model_name;        

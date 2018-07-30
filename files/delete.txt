@@ -1,14 +1,16 @@
 public function delete_post()
-    {		$where_condition_fields=array('cluster_id');
-		$data_to_be_appended_fields=array('deleted_by');
+    {
+    
+		data_to_be_appended['deleted_by']=$this->post('deleted_by');
+		where_condition['cluster_id']=$this->post('cluster_id');
         $table1=$this->table1;
         $table2=$this->table2;
         $time=date("Y-m-d H:i:s");
         $model_name=$this->model_name;
-        $where_conditions=$this->get_post_values($where_condition_fields);
+        //$where_conditions=$this->get_post_values($where_condition_fields);
         $this->check_post_values($where_conditions);
         //$this->print_array($where_conditions);
-        $data_to_be_appended=$this->get_post_values($data_to_be_appended_fields);
+        //$data_to_be_appended=$this->get_post_values($data_to_be_appended_fields);
         $extra_data['dod']=$time;
         $extra_data['is_active']='N';
         $data_to_be_appended=array_merge($data_to_be_appended,$extra_data);

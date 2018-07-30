@@ -1,7 +1,7 @@
 		$selection=implode(",",$selection_fields);
 		$table1=$this->table1;
 		$model_name=$this->model_name;               
-		$where_conditions=$this->get_post_values($where_condition_fields);
+		//$where_conditions=$this->get_post_values($where_condition_fields);
 		$this->check_post_values($where_conditions);
 		//$this->print_array($where_conditions);        
 		$result=$this->$model_name->select($selection,$table1,$where_conditions);

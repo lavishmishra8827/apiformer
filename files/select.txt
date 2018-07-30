@@ -1,11 +1,11 @@
 public function get_post()
     {
-		$where_condition_fields=array();
-		$selection_fields=array();
+		$selection_fields=array('cluster_name','state','country');
+		$where_conditions['cluster_id']=$this->post('cluster_id');
 		$selection=implode(",",$selection_fields);
 		$table1=$this->table1;
 		$model_name=$this->model_name;               
-		$where_conditions=$this->get_post_values($where_condition_fields);
+		//$where_conditions=$this->get_post_values($where_condition_fields);
 		$this->check_post_values($where_conditions);
 		//$this->print_array($where_conditions);        
 		$result=$this->$model_name->select($selection,$table1,$where_conditions);

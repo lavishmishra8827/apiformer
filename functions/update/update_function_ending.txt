@@ -2,13 +2,13 @@
         $table2=$this->table2;
         $time=date("Y-m-d H:i:s");
         $model_name=$this->model_name;
-        $data=$this->get_post_values($data_fields);
+        //$data=$this->get_post_values($data_fields);
         $this->check_post_values($data);
         //$this->print_array($data);
-        $where_conditions=$this->get_post_values($where_condition_fields);
+        //$where_conditions=$this->get_post_values($where_condition_fields);
         $this->check_post_values($where_conditions);
         //$this->print_array($where_conditions);
-        $data_to_be_appended=$this->get_post_values($data_to_be_appended_fields);
+        //$data_to_be_appended=$this->get_post_values($data_to_be_appended_fields);
         $data_to_be_appended['dod']=$time;
         $data_to_be_appended['is_active']='Y';
         $this->check_post_values($data_to_be_appended);
